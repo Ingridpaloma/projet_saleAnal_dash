@@ -1,9 +1,22 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+import os
+from dash import dcc, html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import pandas as pd
+import numpy as np
+import plotly.express as px
+
+
+#files=[file for file in os.listdir(r'C:\Users\Ingrid\Desktop\Sales_analysis\dataBase')]
+#path=r'C:\Users\Ingrid\Desktop\Sales_analysis\dataBase'
+#Creer une nouvelle BD issue des fichiers de la premiere BD
+#all_data=pd.DataFrame()
+#for file in files:
+#    current_data=pd.read_csv(path+'/'+file)
+#    all_data=pd.concat([all_data,current_data])
+#print(all_data)
+
 
 url_confirmed = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
 url_deaths = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
@@ -20,6 +33,7 @@ date2 = deaths.columns[4:]
 total_deaths = deaths.melt(id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], value_vars=date2, var_name='date', value_name='death')
 date3 = recovered.columns[4:]
 total_recovered = recovered.melt(id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'], value_vars=date3, var_name='date', value_name='recovered')
+
 
 # Merging data frames
 covid_data = total_confirmed.merge(right=total_deaths, how='left', on=['Province/State', 'Country/Region', 'date', 'Lat', 'Long'])
@@ -64,8 +78,8 @@ app.layout = html.Div([
         ),
         html.Div([
             html.Div([
-                html.H3("Covid - 19", style={"margin-bottom": "0px", 'color': 'white'}),
-                html.H5("Track Covid - 19 Cases", style={"margin-top": "0px", 'color': 'white'}),
+                html.H3("Data sale Analysies", style={"margin-bottom": "0px", 'color': 'white'}),
+                html.H5("Track - 19 Cases", style={"margin-top": "0px", 'color': 'white'}),
             ])
         ], className="one-half column", id="title"),
 
